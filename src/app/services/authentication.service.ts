@@ -8,25 +8,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<User>;
-    public currentUser: Observable<User>;
+    public currentToken: BehaviorSubject<any> = new BehaviorSubject('');
 
-    private urlBack = 'http://127.0.0.1:6686'
+    private urlBack = 'http://127.0.0.1:6686';
+
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-        this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    public get currentUserValue(): User {
-        return this.currentUserSubject.value;
-    }
-
-    login(base64) {
+    login(encodedUser) {
         const headers = new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `Basic ${base64}`
+            'Authorization': `Basic ${encodedUser}`
         });
-     
+        
+        // this.currentToken.next(token)
         return this.http.get<any>(`${this.urlBack}/auth/signin`, { headers: headers})
         .pipe()
     }
@@ -34,6 +29,6 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(null);
+        this.currentToken.next(null);
     }
 }
