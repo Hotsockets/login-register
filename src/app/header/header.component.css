@@ -1,0 +1,63 @@
+header{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0,0,0,0.05);
+}
+
+.logo-wrp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
+    width: 60px;
+    height: 100%;
+}
+
+.user-wrp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
+    width: 60px;    
+    height: 100%;
+}
+
+.imgs {
+    border-radius: 50%;
+    width: 80%;
+    height: 80%;
+    outline: none;
+}
+
+.imgs:hover {
+    cursor: pointer;
+}
+
+.option-wrp {
+    position: absolute;
+    top: 65px;
+    right: 25px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.015);
+
+}
+
+option {
+    background-color: rgba(0, 0, 0, 0.025);
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    outline: none;
+}
+
+option:hover {
+    background-color: rgba(0, 0, 0, 0.030);
+    cursor: pointer;
+}

@@ -1,0 +1,14 @@
+<header>
+  <div class="logo-wrp">
+    <img src="../../assets/balthazar.png" alt="balthazar-logo" class="imgs"
+     [routerLink]="['']">
+  </div>
+  <div class="user-wrp">
+    <img src="../../assets/user.png" alt="user-logo" class="imgs"  (click)="displayUserOptions()">
+  </div>
+</header>
+
+<div class="option-wrp" *ngIf="displayOptions === true">
+  <option value="login" [routerLink]="['']">login</option>
+  <option value="logout">logout</option>
+</div>
