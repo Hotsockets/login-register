@@ -1,0 +1,9 @@
+.fill {
+    height: calc(100% - 60px);
+}
+
+.jumbotron {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important
+}
