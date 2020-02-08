@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { PetStoreComponent } from './pet-store/pet-store.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
    declarations: [
@@ -22,6 +23,7 @@ import { HeaderComponent } from './header/header.component';
    imports: [
       BrowserModule,
       AppRoutingModule,
+      HttpClientModule,
       ReactiveFormsModule,
    ],
    providers: [],

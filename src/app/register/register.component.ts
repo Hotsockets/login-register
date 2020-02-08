@@ -31,7 +31,6 @@ export class RegisterComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
-        this.registerForm.valueChanges.subscribe(data => console.log(data))
     }
 
     // convenience getter for easy access to form fields

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { AuthenticationService } from '../services/authentication.service';
 
 // import { AlertService, AuthenticationService } from '@/_services';
 
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        // private authenticationService: AuthenticationService,
+        private authenticationService: AuthenticationService,
         // private alertService: AlertService
     ) {
         // redirect to home if already logged in
@@ -40,22 +41,26 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
+        let encodedData = btoa(this.f.username.value+':'+this.f.password.value)
+        
         // stop here if form is invalid
         if (this.loginForm.invalid) {
+            alert()
             return;
         }
 
         this.loading = true;
-        // this.authenticationService.login(this.f.username.value, this.f.password.value)
-        //     .pipe(first())
-        //     .subscribe(
-        //         data => {
-        //             this.router.navigate([this.returnUrl]);
-        //         },
-        //         error => {
-        //             this.alertService.error(error);
-        //             this.loading = false;
-        //         });
+        this.authenticationService.login(encodedData)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    console.log(data)
+                    this.router.navigate(['/home']);
+                },
+                error => {
+                    // this.alertService.error(error);
+                    console.log('Error : ', error)
+                    this.loading = false;
+                });
     }
 }
