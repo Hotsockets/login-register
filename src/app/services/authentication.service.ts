@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
-import { User } from '../models/user.model';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+    
     public currentToken: BehaviorSubject<any> = new BehaviorSubject('');
 
     private urlBack = 'http://127.0.0.1:6686';
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
     }
 
     login(encodedUser) {
@@ -30,5 +29,11 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentToken.next(null);
+        console.log(this.router)
+        if(this.router.url !== '/') {
+            this.router.navigate(['/']);
+        } else {
+            window.location.reload();
+        }
     }
 }

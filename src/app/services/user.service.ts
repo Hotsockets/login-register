@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 
 import { User } from '../models/user.model';
 import { AuthenticationService } from './authentication.service';
@@ -12,7 +12,10 @@ export class UserService {
     constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
     getById(id: number) {
-        return this.http.get(`/users/${id}`);
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded'
+        })
+        return this.http.get(`${this.urlBack}/users/${id}`, {headers: headers});
     }
 
     getAll() {
@@ -22,8 +25,8 @@ export class UserService {
         return this.http.get<any>(`${this.urlBack}/users`, {headers: headers});
     }
 
-    register(user: User) {
-        return this.http.post(`/users/register`, user);
+    register(body: User) {
+        return this.http.post(`${this.urlBack}/auth/signup`, body);
     }
 
     update(user: User) {

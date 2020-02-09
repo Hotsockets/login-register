@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
+import { UserService } from '../services/user.service';
 
 // import { AlertService, AuthenticationService } from '@/_services';
 
@@ -12,12 +13,14 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
+    connexionStatus: string;
 
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
+        private userService: UserService
         // private alertService: AlertService
     ) {
         // redirect to home if already logged in
@@ -32,6 +35,11 @@ export class LoginComponent implements OnInit {
             password: ['', Validators.required]
         });
 
+        if(localStorage.currentUser ) {
+            this.connexionStatus = 'connected';
+        } else {
+            this.connexionStatus = 'disconnected';
+        }
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
@@ -50,16 +58,19 @@ export class LoginComponent implements OnInit {
 
         this.loading = true;
         this.authenticationService.login(encodedData)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.authenticationService.currentToken.next(data.token)
-                    this.router.navigate(['/home']);
-                },
-                error => {
-                    // this.alertService.error(error);
-                    console.log('Error : ', error)
-                    this.loading = false;
-                });
+        .pipe(first())
+        .subscribe(
+            data => {
+                this.authenticationService.currentToken.next(data.token)
+                localStorage.setItem('currentUser', JSON.stringify({token : data.token}))
+                this.router.navigate(['/home']);
+            },
+            error => {
+                // this.alertService.error(error);
+                console.log('Error : ', error)
+                this.loading = false;
+            }
+        );
+        this.userService.getById
     }
 }

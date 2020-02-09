@@ -34,6 +34,7 @@ header{
 
 .imgs:hover {
     cursor: pointer;
+    opacity: 0.8;
 }
 
 .option-wrp {

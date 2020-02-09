@@ -11,18 +11,22 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';   
 import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor { 
 
-    constructor(private authenticationService: AuthenticationService) {}
+    constructor(private authenticationService: AuthenticationService, private router: Router) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token: string = this.authenticationService.currentToken.value;
+        let token = this.authenticationService.currentToken.value;
         
         if (token) {
-            request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
-            console.log('toto' ,request)
+            let localStorageToken= JSON.parse(localStorage.getItem('currentUser')).token;
+            request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + localStorageToken) });
+            console.log('Intercepted request :' ,request)
+        } else {
+            this.router.navigate([''])
         }
 
         if (!request.headers.has('Content-Type')) {
@@ -45,7 +49,7 @@ export class TokenInterceptor implements HttpInterceptor {
                     reason: error && error.error.reason ? error.error.reason : '',
                     status: error.status
                 };
-                console.log(data);
+                console.log('data : ', data);
                 return throwError(error);
             })
         );
