@@ -1,13 +1,66 @@
 .card-body {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.card {
+    width: 15rem;
+    height: 15rem;
+    margin-right: 0 !important;
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    transition: all 0.2s ease-in-out;
+}
+
+.card::after {
+    background-image:'url(../../assets/homepage-icon.png)';
+    background-position: 'center center';
+    background-size: 'cover';
+}
+
+.card:hover {
+    transform: scale(1.01);
 }
 
 .full-width {
     width: 100%;
+    text-align: center;
 }
 
 .add-store-btn {
+    position: fixed;
+    top: 85px;
+    right: 50px;
     width: 18rem;
+}
+
+.add-pet-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 1.2rem;
+}
+
+h5 {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+p {
+    position: absolute;
+    bottom: 0;
+}
+
+.store-width {
+    width: 100%;
+}
+
+.store-ctr {
+    position: absolute;
+    width: auto;
+    display: flex;
+    flex-flow: row nowrap;
 }

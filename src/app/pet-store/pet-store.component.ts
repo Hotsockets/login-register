@@ -19,7 +19,6 @@ export class PetStoreComponent implements OnInit {
 
   ngOnInit() {
     this.roleUser = this.roleUserObject.role
-
     this.getAllStores();
   }
 
@@ -32,9 +31,17 @@ export class PetStoreComponent implements OnInit {
 
   createStore() {
     let body;
-
+    
     this.petStoreService.createStore(body).subscribe(data => 
       console.log(data)
     )
+  }
+
+  buyPet() {
+    let idStore;
+    let idPet;
+    this.petStoreService.buyPet(idStore, idPet).subscribe(data => {
+      console.log(data);
+    })
   }
 }

@@ -1,24 +1,35 @@
-<div [ngSwitch]="roleUser">
+<div [ngSwitch]="roleUser" class="store-width">
 
-  <div *ngSwitchCase="'seller'">
+  <div *ngSwitchCase="'seller'" class=" store-width store-ctr">
     <button type="button" [routerLink]="['/add-store']" class="btn btn-outline-primary add-store-btn">Add Store</button>
     
+    <div class="card" *ngFor="let stores of stores" [ngStyle]="{'background-image':'url(../../assets/homepage-icon.png)', 'background-position': 'center center', 'background-size': 'cover'}">
+      <div class="card-body">
+        <h5 class="card-title full-width">Store #{{stores.id}}</h5>
+        <p class="card-text full-width">Owner : {{stores.owner}}</p>
+        <button type="button" (click)="addPetToStore()" class="btn btn-outline-primary add-pet-btn">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'buyer'">
     <div class="ng-loop-ctr" *ngFor="let stores of stores">
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="../../assets/homepage-icon.png" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title full-width">Store #{{stores.id}}</h5>
           <p class="card-text full-width">Owner : {{stores.owner}}</p>
-          <button type="button" (click)="addPetToStore()" class="btn btn-outline-primary full-width">Add a pet</button>
           <label for="pets">Pet list :</label>
           <ul name="pets" *ngFor="let pet of stores.pets" class="full-width"> 
-            <li> pet number {{pet.id}}</li>
+            <li> pet number {{pet.id}}
+                <button type="button" (click)="buyPet()" class="btn btn-outline-primary ">
+                  Buy this pet
+                </button>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-
-  <div *ngSwitchCase="'buyer'">You're a buyer</div>
 
 </div>

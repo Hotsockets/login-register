@@ -28,9 +28,9 @@ export class TokenInterceptor implements HttpInterceptor {
             this.router.navigate([''])
         }
 
-        if (!request.headers.has('Content-Type')) {
-            request = request.clone({ headers: request.headers.set('Content-Type', 'application/x-www-form-urlencoded') });
-        }
+        // if (!request.headers.has('Content-Type')) {
+            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
+        // }
 
         request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
         
