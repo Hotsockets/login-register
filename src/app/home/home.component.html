@@ -1,10 +1,9 @@
-<h1>Home</h1>
-<div>
-    <p>Welcome </p>
-</div>
-<div>
-    All the registered users: 
-    <ul>
-        <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-    </ul>
+<div class="home-ctr">
+    <h1>Home</h1>
+    <div>
+        <p>Welcome dear {{firstNameUser}}</p>
+    </div>
+    <div  class="pet-store">
+        <pet-store></pet-store>
+    </div>
 </div>

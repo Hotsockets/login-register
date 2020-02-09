@@ -1,0 +1,13 @@
+.card-body {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.add-store-btn {
+    width: 18rem;
+}

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     
-    public currentToken: BehaviorSubject<any> = new BehaviorSubject('');
 
     private urlBack = 'http://127.0.0.1:6686';
 
@@ -19,17 +19,23 @@ export class AuthenticationService {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': `Basic ${encodedUser}`
         });
-        
-        // this.currentToken.next(token)
+
         return this.http.get<any>(`${this.urlBack}/auth/signin`, { headers: headers})
-        .pipe()
+        .pipe(
+            map(data => {
+                localStorage.setItem('currentUser', JSON.stringify({token : data.token}))
+                localStorage.setItem('roleUser', JSON.stringify({role : data.role}))
+                localStorage.setItem('firstName', JSON.stringify({firstName : data.firstName}))
+            })
+        )
     }
 
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
-        this.currentToken.next(null);
-        console.log(this.router)
+        localStorage.removeItem('roleUser');
+        localStorage.removeItem('firstName');
+
         if(this.router.url !== '/') {
             this.router.navigate(['/']);
         } else {

@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
-
+    body: Body;
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
@@ -35,6 +35,10 @@ export class RegisterComponent implements OnInit {
             birthday: ['', Validators.required],
             role: ['', [Validators.required]]
         });
+        this.registerForm.valueChanges.subscribe(data => {
+            this.body = data;
+            console.log(this.body)
+        })
     }
 
     get f() { return this.registerForm.controls; }
@@ -45,13 +49,11 @@ export class RegisterComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         }
-
+        
         this.loading = true;
         this.userService.register(this.registerForm.value)
-        .pipe(first())
         .subscribe(
         data => {
-            console.log('registerFormValue : ', this.registerForm.value)
             console.log('data: ', data);
             this.router.navigate(['/']);
         },

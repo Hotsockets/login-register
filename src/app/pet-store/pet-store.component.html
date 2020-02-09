@@ -1,3 +1,24 @@
-<p>
-  pet-store works!
-</p>
+<div [ngSwitch]="roleUser">
+
+  <div *ngSwitchCase="'seller'">
+    <button type="button" [routerLink]="['/add-store']" class="btn btn-outline-primary add-store-btn">Add Store</button>
+    
+    <div class="ng-loop-ctr" *ngFor="let stores of stores">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="../../assets/homepage-icon.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title full-width">Store #{{stores.id}}</h5>
+          <p class="card-text full-width">Owner : {{stores.owner}}</p>
+          <button type="button" (click)="addPetToStore()" class="btn btn-outline-primary full-width">Add a pet</button>
+          <label for="pets">Pet list :</label>
+          <ul name="pets" *ngFor="let pet of stores.pets" class="full-width"> 
+            <li> pet number {{pet.id}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'buyer'">You're a buyer</div>
+
+</div>

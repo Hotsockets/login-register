@@ -58,11 +58,8 @@ export class LoginComponent implements OnInit {
 
         this.loading = true;
         this.authenticationService.login(encodedData)
-        .pipe(first())
         .subscribe(
             data => {
-                this.authenticationService.currentToken.next(data.token)
-                localStorage.setItem('currentUser', JSON.stringify({token : data.token}))
                 this.router.navigate(['/home']);
             },
             error => {

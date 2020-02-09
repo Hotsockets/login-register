@@ -11,10 +11,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/token.interceptor';
+import { AddStoreComponent } from './add-store/add-store.component';
 
 @NgModule({
    declarations: [
       AppComponent,
+      AddStoreComponent,
       HomeComponent,
       RegisterComponent,
       LoginComponent,

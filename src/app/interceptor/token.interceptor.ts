@@ -19,12 +19,11 @@ export class TokenInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService, private router: Router) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let token = this.authenticationService.currentToken.value;
-        
-        if (token) {
-            let localStorageToken= JSON.parse(localStorage.getItem('currentUser')).token;
-            request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + localStorageToken) });
-            console.log('Intercepted request :' ,request)
+        let localStorageToken= JSON.parse(localStorage.getItem('currentUser'));
+        // console.log('Intercepted request :' ,request)
+
+        if (localStorageToken) {
+            request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + localStorageToken.token) });
         } else {
             this.router.navigate([''])
         }
@@ -34,11 +33,11 @@ export class TokenInterceptor implements HttpInterceptor {
         }
 
         request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
-
+        
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    console.log('event--->>>', event);
+                    // console.log('event--->>>', event);
                 }
                 return event;
                 

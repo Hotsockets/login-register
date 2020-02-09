@@ -11,16 +11,17 @@ import { ThrowStmt } from '@angular/compiler';
 export class HomeComponent implements OnInit {
 
   users: User[] = [];
+  firstNameUserObject = JSON.parse(localStorage.getItem('firstName'));
+  firstNameUser: string;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.firstNameUser = this.firstNameUserObject.firstName;
+    
     this.userService.getAll().subscribe(res => {
       this.users = res.data.users;
     });
 
-    this.userService.getById(1).subscribe(res => {
-      console.log(res)
-    })
   }
 }
