@@ -38,9 +38,9 @@ header{
 }
 
 .option-wrp {
-    position: absolute;
-    top: 65px;
-    right: 25px;
+    position: fixed;
+    top: 5px;
+    right: 115px;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -59,6 +59,6 @@ option {
 }
 
 option:hover {
-    background-color: rgba(0, 0, 0, 0.030);
+    opacity: 0.5;
     cursor: pointer;
 }

@@ -25,6 +25,7 @@ export class AuthenticationService {
             map(data => {
                 localStorage.setItem('currentUser', JSON.stringify({token : data.token}))
                 localStorage.setItem('roleUser', JSON.stringify({role : data.role}))
+                localStorage.setItem('idUser', JSON.stringify({id : data.id}))
                 localStorage.setItem('firstName', JSON.stringify({firstName : data.firstName}))
             })
         )
@@ -34,6 +35,7 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         localStorage.removeItem('roleUser');
+        localStorage.removeItem('idUser');
         localStorage.removeItem('firstName');
 
         if(this.router.url !== '/') {

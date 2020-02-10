@@ -25,7 +25,7 @@ export class UserService {
         return this.http.get<any>(`${this.urlBack}/users`, {headers: headers});
     }
 
-    register(body: User) {
+    register(body) {
         return this.http.post(`${this.urlBack}/auth/signup`, body);
     }
 

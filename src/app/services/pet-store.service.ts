@@ -16,8 +16,12 @@ export class PetStoreService {
         return this.http.get<any>(`${this.urlBack}/pet-stores`);
     }
 
-    createStore(body) {
+    createStore(body: Body) {
         return this.http.post<PetStore>(`${this.urlBack}/pet-stores`, body);
+    }
+
+    createPetInStore(body: Body, id: number) {
+        return this.http.post<PetStore>(`${this.urlBack}/pet-stores/${id}/pets`, body);
     }
 
     buyPet(idStore: number, idPet: number) {

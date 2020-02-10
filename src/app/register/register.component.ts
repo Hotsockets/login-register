@@ -8,7 +8,10 @@ import { UserService } from '../services/user.service';
 
 // import { AlertService, UserService, AuthenticationService } from '@/_services';
 
-@Component({templateUrl: 'register.component.html'})
+@Component({
+    templateUrl: 'register.component.html',
+    styleUrls: ['register.component.css']
+})
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
@@ -51,7 +54,7 @@ export class RegisterComponent implements OnInit {
         }
         
         this.loading = true;
-        this.userService.register(this.registerForm.value)
+        this.userService.register(this.body)
         .subscribe(
         data => {
             console.log('data: ', data);

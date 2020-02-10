@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PetStoreService } from '../services/pet-store.service';
 
 @Component({
-  selector: 'app-add-store',
+  selector: 'add-store',
   templateUrl: './add-store.component.html',
   styleUrls: ['./add-store.component.css']
 })

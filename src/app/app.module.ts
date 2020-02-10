@@ -12,10 +12,12 @@ import { HeaderComponent } from './header/header.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { AddStoreComponent } from './add-store/add-store.component';
+import { AddPetComponent } from './add-pet/add-pet.component';
 
 @NgModule({
    declarations: [
       AppComponent,
+      AddPetComponent,
       AddStoreComponent,
       HomeComponent,
       RegisterComponent,
