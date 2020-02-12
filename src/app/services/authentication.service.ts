@@ -3,13 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    
-
-    private urlBack = 'http://127.0.0.1:6686';
 
     constructor(private http: HttpClient, private router: Router) {
     }
@@ -20,7 +18,7 @@ export class AuthenticationService {
             'Authorization': `Basic ${encodedUser}`
         });
 
-        return this.http.get<any>(`${this.urlBack}/auth/signin`, { headers: headers})
+        return this.http.get<any>(`${environment.apiUrl}/auth/signin`, { headers: headers})
         .pipe(
             map(data => {
                 localStorage.setItem('currentUser', JSON.stringify({token : data.token}))

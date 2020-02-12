@@ -10,10 +10,10 @@ import { PetStore } from '../models/pet-store.model';
 })
 export class PetStoreComponent implements OnInit {
 
-  roleUserObject = JSON.parse(localStorage.getItem('roleUser'));
-  roleUser: string;
-  stores: PetStore[] = [];
-  petStore: Pet[] = [];
+  private roleUserObject = JSON.parse(localStorage.getItem('roleUser'));
+  public roleUser: string;
+  public stores: PetStore[] = [];
+  public petStore: Pet[] = [];
 
   constructor(private petStoreService: PetStoreService) { }
 

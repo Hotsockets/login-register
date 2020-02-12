@@ -5,8 +5,8 @@
     
     <div class="stores-container">
 
-      <div class="card" *ngFor="let stores of stores">
-        <div class="card-body">
+      <div class="card" *ngFor="let stores of stores" (click)="alert('toto')">
+        <div class="card-body" [routerLink]="['/store/',stores.id,'/pets']">
           <h5 class="card-title full-width">Store #{{stores.id}}</h5>
           <p class="card-text full-width">Owner : {{stores.owner}}</p>
           <button type="button" [routerLink]="['/store/',stores.id]" class="btn btn-outline-primary add-pet-btn">+</button>

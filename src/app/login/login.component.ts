@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     submitted = false;
     returnUrl: string;
     connexionStatus: string;
+    encodedData: string;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
         } else {
             this.connexionStatus = 'disconnected';
         }
+        console.log(localStorage)
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
@@ -49,7 +51,7 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        let encodedData = btoa(this.f.username.value+':'+this.f.password.value)
+        this.encodedData = btoa(`${this.f.username.value}:${this.f.password.value}`)
         
         // stop here if form is invalid
         if (this.loginForm.invalid) {
@@ -57,7 +59,7 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.login(encodedData)
+        this.authenticationService.login(this.encodedData)
         .subscribe(
             data => {
                 this.router.navigate(['/home']);

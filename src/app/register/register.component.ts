@@ -13,21 +13,16 @@ import { UserService } from '../services/user.service';
     styleUrls: ['register.component.css']
 })
 export class RegisterComponent implements OnInit {
-    registerForm: FormGroup;
-    loading = false;
-    submitted = false;
-    body: Body;
+    private registerForm: FormGroup;
+    private loading = false;
+    private submitted = false;
+    private body;
+
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private authenticationService: AuthenticationService,
         private userService: UserService,
-    ) { 
-        // redirect to home if already logged in
-        // if (this.authenticationService.currentUserValue) { 
-        //     this.router.navigate(['/']);
-        // }
-    }
+    ) { }
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
@@ -38,17 +33,16 @@ export class RegisterComponent implements OnInit {
             birthday: ['', Validators.required],
             role: ['', [Validators.required]]
         });
-        this.registerForm.valueChanges.subscribe(data => {
-            this.body = data;
-            console.log(this.body)
-        })
+        console.log('register Form :', this.registerForm.value)
     }
 
     get f() { return this.registerForm.controls; }
 
     onSubmit() {
         this.submitted = true;
+        this.body = { 'user' : this.registerForm.value }
 
+        console.log('body', this.body)
         if (this.registerForm.invalid) {
             return;
         }

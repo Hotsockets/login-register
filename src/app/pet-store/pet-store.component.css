@@ -30,9 +30,9 @@
 
 .add-store-btn {
     position: fixed;
-    top: 70px;
-    right: 430px;
-    width: 14rem;
+    top: 85px;
+    right: 50px;
+    width: 18rem;
 }
 
 .add-pet-btn {
@@ -40,13 +40,6 @@
     right: 10px;
     top: 10px;
     font-size: 1.2rem;
-}
-
-.stores-container {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
 }
 
 h5 {
@@ -57,4 +50,14 @@ h5 {
 p {
     position: absolute;
     bottom: 0;
+}
+
+.store-width {
+    width: 100%;
+}
+
+.store-ctr {
+    width: auto;
+    display: flex;
+    flex-flow: row nowrap;
 }
