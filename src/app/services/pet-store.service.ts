@@ -19,6 +19,10 @@ export class PetStoreService {
         return this.http.post<PetStore>(`${environment.apiUrl}/pet-stores`, body);
     }
 
+    getAllPetsInStore(id: number) {
+        return this.http.get<PetStore>(`${environment.apiUrl}/pet-stores/${id}/pets`);
+    }
+
     createPetInStore(body: Body, id: number) {
         return this.http.post<PetStore>(`${environment.apiUrl}/pet-stores/${id}/pets`, body);
     }

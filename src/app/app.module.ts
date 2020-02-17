@@ -13,6 +13,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { AddStoreComponent } from './add-store/add-store.component';
 import { AddPetComponent } from './add-pet/add-pet.component';
+import { PetListComponent } from './pet-list/pet-list.component';
 
 @NgModule({
    declarations: [
@@ -23,13 +24,14 @@ import { AddPetComponent } from './add-pet/add-pet.component';
       RegisterComponent,
       LoginComponent,
       PetStoreComponent,
-      HeaderComponent
+      HeaderComponent,
+      PetListComponent
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,
-      ReactiveFormsModule,
+      ReactiveFormsModule
    ],
    providers: [
       {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}

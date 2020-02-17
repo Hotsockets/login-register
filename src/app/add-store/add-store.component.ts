@@ -18,7 +18,7 @@ export class AddStoreComponent implements OnInit {
     this.storeForm = this.formBuilder.group({
       owner: ['', Validators.required],
     });
-    this.storeForm.valueChanges.subscribe(data => this.body = data)
+    this.storeForm.valueChanges.subscribe(data => this.body = data);
   }
 
   get f() { return this.storeForm.controls; }

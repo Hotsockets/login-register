@@ -1,0 +1,14 @@
+<div class="pet-list">
+  <div class="pet-list-header">
+    <h2>Welcome to {{storeName}} pet list</h2>
+    <button class="btn btn-outline-primary" routerLink="/home">Check stores</button>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item pet-item" *ngFor="let pets of petIds">
+      {{pets.id}}
+      <button class="btn btn-outline-primary" (click)="buyPet(pets.id)">
+        Buy
+      </button>
+    </li>
+  </ul>
+</div>
