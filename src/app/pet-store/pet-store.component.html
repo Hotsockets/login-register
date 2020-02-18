@@ -1,28 +1,23 @@
 <div [ngSwitch]="roleUser" class="store-width">
 
-  <div *ngSwitchCase="'seller'">
+  <div *ngSwitchCase="'seller'" class="store-container">
     <button type="button" [routerLink]="['/add-store']" class="btn btn-outline-primary add-store-btn">Add Store</button>
-    
-    <div class="stores-container">
-
-      <div class="card" *ngFor="let stores of stores" (click)="alert('toto')">
-        <div class="card-body" [routerLink]="['/store/',stores.id,'/pets']">
-          <h5 class="card-title full-width">Store #{{stores.id}}</h5>
-          <p class="card-text full-width">Owner : {{stores.owner}}</p>
-          <button type="button" [routerLink]="['/store/',stores.id]" class="btn btn-outline-primary add-pet-btn">+</button>
-        </div>
+    <div class="card" *ngFor="let stores of stores; let first = first" [class.card-first-child]="first">
+      <div class="card-body">
+        <h5 class="card-title full-width">Store #{{stores.id}}</h5>
+        <p class="card-text full-width">Owner : {{stores.owner}}</p>
+        <button type="button" [routerLink]="['/store/',stores.id]" class="btn btn-outline-primary add-pet-btn">+</button>
       </div>
-      
     </div>
   </div>
     
 
-  <div *ngSwitchCase="'buyer'">
-    <div class="card" *ngFor="let stores of stores">
+  <div *ngSwitchCase="'buyer'" class="store-container">
+    <div class="card" *ngFor="let stores of stores; let first = first" [class.card-first-child]="first">
       <div class="card-body">
         <h5 class="card-title full-width">Store #{{stores.id}}</h5>
         <p class="card-text full-width">Owner : {{stores.owner}}</p>
-        <button type="button" (click)="checkPets()" class="btn btn-outline-primary add-pet-btn">Pets</button>
+        <button type="button"  [routerLink]="['/pet-stores/',stores.id,'pets']" class="btn btn-outline-primary add-pet-btn">Pets</button>
       </div>
     </div>
   </div>

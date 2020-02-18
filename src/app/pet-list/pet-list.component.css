@@ -1,0 +1,17 @@
+.pet-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1em;
+}
+
+.pet-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.pet-item:hover {
+  background-color: rgba(0,0,0,.025);
+}

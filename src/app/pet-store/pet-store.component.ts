@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PetStoreService } from '../services/pet-store.service';
 import { Pet } from '../models/pet.model';
 import { PetStore } from '../models/pet-store.model';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'pet-store',
@@ -15,7 +17,7 @@ export class PetStoreComponent implements OnInit {
   public stores: PetStore[] = [];
   public petStore: Pet[] = [];
 
-  constructor(private petStoreService: PetStoreService) { }
+  constructor(private petStoreService: PetStoreService, private router: Router) { }
 
   ngOnInit() {
     this.roleUser = this.roleUserObject.role
@@ -31,17 +33,12 @@ export class PetStoreComponent implements OnInit {
 
   createStore() {
     let body;
-    
     this.petStoreService.createStore(body).subscribe(data => 
       console.log(data)
     )
   }
 
-  buyPet() {
-    let idStore;
-    let idPet;
-    this.petStoreService.buyPet(idStore, idPet).subscribe(data => {
-      console.log(data);
-    })
+  goToPetList(id: number) {
+    this.router.navigate([`${environment.apiUrl}/pet-stores/${id}/pets`])
   }
 }
